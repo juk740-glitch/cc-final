@@ -124,7 +124,7 @@ function setup() {
   
   button_.hide();
   
-  button_.mousePressed(() => witch.setName());
+  button_.mousePressed(() => witch.startGame());
   
   //what am i looking for
   destiny = createRadio();
