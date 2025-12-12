@@ -5,7 +5,6 @@ class Witch {
     this.w = 30;
     this.h = 30;
     this.speed = 4;
-    this.name = "";
   }
 
   body() {
@@ -14,10 +13,8 @@ class Witch {
     image(babyWitch, this.x, this.y, 200, 200);
   }
   
-  askNameScreen() {
-    input_.show();
+  startScreen() {
     button_.show();
-    //greeting_.show();
     
     imageMode(CENTER);
     image(babyWitch, 300, 200, 200, 200);  
