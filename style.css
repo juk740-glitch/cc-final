@@ -148,5 +148,23 @@ a.fill-div {
     color: black;
 }
 
+#p5-wrapper {
+  width: 100%;               
+  max-width: 800px;          
+  margin-top: 20px;
+}
+
+#p5-container {
+  width: 100%;
+  height: auto;              
+  position: relative;
+}
+
+#p5-container canvas {
+  width: 100% !important;    /* scale canvas to fit the div */
+  height: auto !important;   /* maintain proportions */
+  display: block;
+}
+
 
 
