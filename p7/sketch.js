@@ -178,12 +178,7 @@ function draw() {
       imageMode(CENTER);
       image(intro, width/2, height/2);
       
-      fill(255);
-      textSize(14);
-      text("what is your name?", 225, 290);
-      
-      witch.askNameScreen();
-      console.log(witch.name);
+      witch.startScreen();
       break;
     case 1: //going to forest
       console.log('entering forest');
