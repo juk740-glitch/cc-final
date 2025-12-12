@@ -64,29 +64,29 @@ let scepterA;
 let locketB;
 
 function preload() {
-  intro = loadImage('pixil-frame-0 (31).png');
+  intro = loadImage('../p7/pixil-frame-0 (31).png');
   
-  babyWitch = loadImage('baby.png');
-  empressSprite = loadImage('empress.png');
-  hangedManSprite = loadImage('hangedman.png');
-  hermitSprite = loadImage('hermit.png');
-  snake = loadImage('devil.png');
+  babyWitch = loadImage('../p7/baby.png');
+  empressSprite = loadImage('../p7/empress.png');
+  hangedManSprite = loadImage('../p7/hangedman.png');
+  hermitSprite = loadImage('../p7/hermit.png');
+  snake = loadImage('../p7/devil.png');
   
-  forest1 = loadImage('bg1.png');
-  forest2 = loadImage('bg2.png');
-  garden1 = loadImage('bg3.png');
-  forest3 = loadImage('bg4.png');
-  forest4 = loadImage('bg5.png');
-  forest5 = loadImage('bg6.png');
-  summit = loadImage('bg7.png');
+  forest1 = loadImage('../p7/bg1.png');
+  forest2 = loadImage('../p7/bg2.png');
+  garden1 = loadImage('../p7/bg3.png');
+  forest3 = loadImage('../p7/bg4.png');
+  forest4 = loadImage('../p7/bg5.png');
+  forest5 = loadImage('../p7/bg6.png');
+  summit = loadImage('../p7/bg7.png');
   
-  lotus1 = loadImage('lotus.png');
-  pearl1 = loadImage('pearl.png');
-  sun1 = loadImage('sun.png');
+  lotus1 = loadImage('../p7/lotus.png');
+  pearl1 = loadImage('../p7/pearl.png');
+  sun1 = loadImage('../p7/sun.png');
   
-  bookC = loadImage('book.png');
-  scepterA = loadImage('scepter.png');
-  locketB = loadImage('locket.png');
+  bookC = loadImage('../p7/book.png');
+  scepterA = loadImage('../p7/scepter.png');
+  locketB = loadImage('../p7/locket.png');
 
 
 }
