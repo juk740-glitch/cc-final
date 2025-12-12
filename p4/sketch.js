@@ -6,7 +6,6 @@ function setup() {
   let c = createCanvas(400, 600);
   c.parent("p5-container"); 
 }
-}
 
 function draw() {
   background(205, 166, 205);
