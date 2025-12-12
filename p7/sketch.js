@@ -118,13 +118,11 @@ function setup() {
 
   // must be absolute positioned
   button_.style("position", "absolute");
+  button_.style('z-index', '10');
   button_.position(375, 300, 65);
   
-  button_.style('z-index', '10');
-  
-  button_.hide();
-  
   button_.mousePressed(() => witch.startGame());
+  button_.hide();
   
   //what am i looking for
   destiny = createRadio();
