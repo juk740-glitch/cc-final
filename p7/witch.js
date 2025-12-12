@@ -15,13 +15,13 @@ class Witch {
   
   startScreen() {
     button_.show();
-    
+  
     imageMode(CENTER);
     image(babyWitch, 300, 200, 200, 200);  
   }
-  
+
   startGame() {
-    scene = 1; // move to next scene
+    scene = 1;
   }
 
   move() {
