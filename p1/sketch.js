@@ -10,9 +10,9 @@ let person2x = 650;
 
 //loading images of fabric for stalls
 function preload() {
-  stall1 = loadImage('./p1/kangas.jpg');
-  stall2 = loadImage('./p1/kenya.jpg');
-  stall3 = loadImage('./p1/uhh.png');
+  stall1 = loadImage('p1/kangas.jpg');
+  stall2 = loadImage('p1/kenya.jpg');
+  stall3 = loadImage('p1/uhh.png');
 }
 
 function setup() {
