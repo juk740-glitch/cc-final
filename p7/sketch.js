@@ -126,15 +126,17 @@ function setup() {
   
   //what am i looking for
   destiny = createRadio();
+  destiny.parent("p5-container");
+  destiny.style("position", "absolute");
   destiny.position(335, 185);
-  //destiny.addClass('my-radio');
 
-  fill(255);
   destiny.option('secrets of the universe');
   destiny.option('manifestation of dreams');
   destiny.option('true love');
-  
+
   submit_ = createButton('submit');
+  submit_.parent("p5-container");
+  submit_.style("position", "absolute");
   submit_.position(340, 255);
   
   destiny.elt.querySelectorAll('label').forEach(label => {
