@@ -182,7 +182,6 @@ function draw() {
       break;
     case 1: //going to forest
       console.log('entering forest');
-      input_.hide();
       button_.hide();
       //greeting_.hide();
 
