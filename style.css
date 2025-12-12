@@ -78,32 +78,31 @@ nav {
 
 #p3 {
     background-color: pink; 
-    top: 25%;
+    top: 40%;
     right: 50%;
 }
 
 #p4 {
     background-color: greenyellow;
-    top: 15%;
-    left: 600%; 
+    top: 25%;
+    left: 50%;
 }
 
 #p5 {
     background-color: red; 
-    top: 500%;
-    left: 200%; 
+    left: 60%;
+    top: 40%
 }
 
 #p6 {
     background-color: orange; 
-    top: 100%;
-    left: 700%;
+    top: 50%;
+    left: 80%;
 }
 
 #p7 {
     background-color: blueviolet; 
-    bottom: 300%;
-    left: 900%;
+    left:60%;
 }
 
 a.fill-div {
