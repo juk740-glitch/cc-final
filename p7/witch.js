@@ -20,11 +20,8 @@ class Witch {
     image(babyWitch, 300, 200, 200, 200);  
   }
   
-  setName() {
-    this.name = input_.value().trim();
-    if (this.name.length > 0) {
-      scene = 1; // move to next scene
-    }
+  startGame() {
+    scene = 1; // move to next scene
   }
 
   move() {
