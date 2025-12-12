@@ -164,9 +164,11 @@ function setup() {
   
   //restart game
   restartButton = createButton('restart journey');
+  restartButton.parent("p5-container");
+  restartButton.style("position", "absolute");
   restartButton.position(width / 2 - 60, height / 2 + 100);
   restartButton.hide();
-
+  
   restartButton.mousePressed(() => restartGame());
 
 }
