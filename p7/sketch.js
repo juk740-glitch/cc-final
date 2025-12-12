@@ -113,19 +113,16 @@ function setup() {
   pearl = new Pearl();
   
   //name input
-  input_ = createInput('');
-  button_ = createButton('enter');
-  input_.position(225, 300);
+  button_ = createButton('begin journey');
+  button_.parent("p5-container");
+
+  // must be absolute positioned
+  button_.style("position", "absolute");
   button_.position(375, 300, 65);
-  //greeting_.position(225, 250);
   
-  input_.style('z-index', '10');
   button_.style('z-index', '10');
-  //greeting_.style('z-index', '10');
   
-  input_.hide();
   button_.hide();
-  //greeting_.hide();
   
   button_.mousePressed(() => witch.setName());
   
