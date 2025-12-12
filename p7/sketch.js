@@ -119,7 +119,7 @@ function setup() {
   // must be absolute positioned
   button_.style("position", "absolute");
   button_.style('z-index', '10');
-  button_.position(375, 300, 65);
+  button_.position(375, 300);
   
   button_.mousePressed(() => witch.startGame());
   button_.hide();
