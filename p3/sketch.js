@@ -1,162 +1,185 @@
-const center = 200;
-const headCenterY = 150;
-const headBottomY = 200;
+//variables
+const MIDDLE = 200;
+const FACE_W = 250; //base face W
+const FACE_H = 200; //base face H
 
+let saved = false;
+let blush = false;
+let bowColor;
+let lastX;
+let lastY;
+  
 function setup() {
-  let c = createCanvas(400, 600);
+  let c = createCanvas(400, 400);
   c.parent("p5-container"); 
-}
+  bowColor = color(255, 0, 0);
 }
 
 function draw() {
-  background(205, 166, 205);
+  background(220);
   
-  noStroke();
+  let x = constrain(mouseX, 50, 500);
+  let y = constrain(mouseY, 50, 500);
   
-  drawBody(0, 200);
-  drawHead();
-  drawBraids();
-  addCharm();
-  makeLegs();
-}
-
-//adds charm
-function addCharm() {
-  fill(0, 255, 0);
-  ellipse(center, headBottomY + 3, 30, 15);
-}
-
-//santi's body
-function drawBody(x, y) {
-  push();
-  translate(x, y);
-  fill('rgb(173,39,173)');
-
-  // draw a filled triangle body
-  triangle(200, 0, 80, 200, 320, 200);
-
-  pop();
-}
-
-//draws her face and head
-function drawHead() {
- fill(255);
-  ellipse(center, headCenterY, 125, 100);
+  //scaling x & y values 
+  let scaleX = (x/2 * 1.25) / FACE_W; 
+  let scaleY = (y/2) / FACE_H; 
   
-  //bangs
-  fill(0);
-  arc(center, headCenterY - 20, 125, 100, -PI, 0);
-  
-  fill(255);
-  triangle(170, 130, 180, 110, 175, 130);
-  triangle(220, 130, 215, 110, 225, 130);
-  
-  //face
-  push();
-  translate(center, headCenterY);
-  
-  let eyeSize = 30;
-  let pupilSize = 12;
-  
-  //left eye
-  fill(0);
-  stroke(0);
-  arc(30, 0, eyeSize, eyeSize, 0, PI, CHORD);
-  fill(255);
-  stroke(0, 255, 0);
-  strokeWeight(2);
-  arc(30, 0, pupilSize, pupilSize, 0, PI, CHORD);
-  
-  //right eye
-  fill(0);
-  stroke(0);
-  arc(-30, 0, eyeSize, eyeSize, 0, PI, CHORD);
-  fill(255);
-  stroke(0, 255, 0);
-  strokeWeight(2);
-  arc(-30, 0, pupilSize, pupilSize, 0, PI, CHORD);
-  
-  //lips
-  fill(255, 111, 168);
-  noStroke();
-  ellipse(0, 30, 20, 13);
-  stroke(0);
-  line(-10, 30, 10, 30);
-  
-  pop();
-}
-
-//draws her braids
-function drawBraids() {
-  push();
-  translate(150, 100);
-  
-  //left braids
-  rotate(QUARTER_PI * 0.35);
-  for(let i = 0; i < 10; i++) {
-    fill(0);
-    ellipse(0, 20 * i, 15, 20);
+  //draws and saves the last face (when mouse is clicked)
+  push(); 
+  translate(MIDDLE, MIDDLE); 
+  if(!saved) {
+      scale(scaleX, scaleY); 
+      drawKitty();
+  } else if(saved) {
+      scale(lastX, lastY);
+      drawKitty();
   }
   pop();
+}
+
+//draws her face
+function drawKitty() {
+  //head
+  strokeWeight(4);
+  fill(255);
+  ellipse(0, 0, FACE_W, FACE_H);
   
-  //right braids
-  push();
-  translate(250, 100);
-  rotate(-QUARTER_PI * 0.35);
-  for(let i = 0; i < 10; i++) {
-    fill(0);
-    ellipse(0, 20 * i, 15, 20);
-  }
-  pop();
+  //ears
+  //ear vertices
+  let v1x = -FACE_W * 0.44;
+  let v2x = FACE_W * 0.44;
+  let vy = -FACE_H * 0.25;
+  //ear offsets
+  let e1 = FACE_W * 0.24;
+  let e2 = FACE_W * 0.16;
+  let e3 = FACE_W * 0.04;
   
+  fill(255);
+  drawEars(v1x, v2x, vy, e1, e2, e3);
+
   //bow
-  push();
-  translate(103, 265);
-  fill(255);
-  triangle(0, 0, -20, -10, -20, 10);
-  triangle(0, 0, 20, -10, 20, 15);
-  pop();
+  fill(bowColor);
+  drawBow(70, -60);
   
-  push();
-  translate(296, 265);
-  fill(255);
-  triangle(0, 0, -20, -10, -20, 10);
-  triangle(0, 0, 20, -10, 20, 15);
-  pop();
+  //nose
+  fill(237, 200, 40);
+  ellipse(0, FACE_H * 0.2, 25, 15);
   
+  //eyes
+  fill(0);
+  ellipse(-FACE_W * 0.22, 20, 15, 20);
+  ellipse(FACE_W * 0.22, 20, 15, 20);
+  
+  //blush
+  noStroke();
+  if(blush) {
+    drawBlush();
+  }
+
+  //whiskas
+  drawWhiskers();
 }
 
-//makes ghost body
-function makeGhost() {
-  let topY = headBottomY - 30;
-  let bottomY = 500;
-  let steps = 60; 
-  
-  //handles y value of each stripe
-  for(let i = 0; i < steps; i++) {
-    let inter = i / steps;
-    let y = lerp(topY, bottomY, inter);
-  
-    let alpha = lerp(200, 0, inter);
+//draws her ears
+function drawEars(v1x, v2x, vy, e1, e2, e3) {
+  beginShape();
+  vertex(v1x, vy);  // outside ear (L)
+  curveVertex(v1x, vy);  // outside ear (L)
+  curveVertex(v1x + e3, vy - e1);  // ear tip 
+  curveVertex(v1x + e1, vy - e2); // ear right
+  curveVertex(v1x + e1, vy - e2); // ear right
+  endShape();
 
-    fill(255, alpha);
-    let leftX = lerp(center, center - 150, inter);
-    let rightX = lerp(center, center + 150, inter);
+  beginShape();
+  vertex(v2x, vy);  // outside ear (R)
+  curveVertex(v2x, vy);  // outside ear (R)
+  curveVertex(v2x - e3, vy - e1); // ear tip
+  curveVertex(v2x - e1, vy - e2);  // ear left
+  curveVertex(v2x - e1, vy - e2);  // ear left
+  endShape(); 
+}
 
-    quad(center, topY, leftX, y, rightX, y, center, topY);
+//draws her bow
+function drawBow(x, y) {
+  beginShape(); //right shape
+  curveVertex(x - 10, y - 10);  
+  curveVertex(x - 25, y - 35); 
+  curveVertex(x - 40, y - 35);
+  curveVertex(x - 50, y);
+  curveVertex(x - 40, y + 10);
+  curveVertex(x - 15, y);
+  endShape(CLOSE);
+  
+  beginShape(); //left shape
+  curveVertex(x + 10, y);  
+  curveVertex(x + 35, y - 20); 
+  curveVertex(x + 45, y - 20);
+  curveVertex(x + 50, y);
+  curveVertex(x + 45, y + 25);
+  curveVertex(x + 15, y + 10);
+  endShape(CLOSE);
+  
+  ellipse(52, -67, 10, 10);
+  ellipse(88, -57, 10, 10);
+  ellipse(70, -60, 30, 30);
+
+}
+
+//draws the whiskers
+function drawWhiskers() {
+  stroke(0);
+  line(-FACE_W * 0.36, 20, - FACE_W * 0.58, 15);
+  line(-FACE_W * 0.36, 40, - FACE_W * 0.54, 40);
+  line(-FACE_W * 0.34, 55, - FACE_W * 0.5, 70);
+  
+  line(FACE_W * 0.36, 20, FACE_W * 0.58, 15);
+  line(FACE_W * 0.36, 40, FACE_W * 0.54, 40);
+  line(FACE_W * 0.34, 55, FACE_W * 0.5, 70);
+}
+
+//changes bow color to different shades of red & pink
+function changeBowColor() {
+  let r = random(240, 255);
+  let b = constrain(random(0, 255), 40, r);
+  let g = constrain(random(0, 255), 0, b);
+  
+  bowColor = color(r, g, b); 
+}
+
+//handles customizations to the face
+function mousePressed() {
+  if(!saved) {
+    saved = true; 
+    lastX = (constrain(mouseX, 50, 500) / 2 * 1.25) / FACE_W;
+    lastY = (constrain(mouseY, 50, 500) / 2) / FACE_H;
+  } else if(saved) {
+    changeBowColor();
   }
 }
 
-//angela's legs
-function makeLegs() {
-  stroke(0);
-  fill(208,208,218);
-  rect(140,400,50, 170);
-  rect(110,570,80, 30);
-  rect(210,400,50, 170);
-  rect(210,570,80, 30);
-  line(160,500,140,500);
-  line(240,500,260,500);
-  
+//adds blush when mouse is dragged
+function mouseDragged() {
+  blush = true;
 }
 
+//draws the blush on kitty
+function drawBlush() {
+  let blush = color(255, 150, 150, 75);
+  let transparent = color(255, 150, 150, 0);
+
+
+  let maxHeight = map(mouseY, 0, 400, 15, 70);
+
+  let blushCount = 6;
+  let blushSize = maxHeight / blushCount;
+
+  for(let i = 0; i < maxHeight; i += blushSize) {
+    let amt = map(i, 0, maxHeight, 0, 1);
+    let blushGradient = lerpColor(blush, transparent, amt);
+    fill(blushGradient);
+    ellipse((-FACE_W * 0.25), 50, (1.33*i), blushSize*(i*0.05));
+    ellipse((FACE_W * 0.25), 50, (1.33*i), blushSize*(i*0.05));
+  }
+  
+}
