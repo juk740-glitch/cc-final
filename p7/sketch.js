@@ -92,7 +92,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 400);
+  let c = createCanvas(600, 400);
+  c.parent("p5-container"); 
   
   //instantiating objects
   walls = new Walls();
